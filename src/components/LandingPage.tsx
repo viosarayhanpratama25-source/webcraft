@@ -309,6 +309,22 @@ export default function LandingPage({ packages, testimonials, blogs }: LandingPa
   // Mock Portfolio Data
   const portfolios = [
     {
+      id: "p4",
+      title: "WebCraft Studio Portfolio",
+      category: "Company Profile",
+      image: "/portfolio/portfolio-1.png",
+      imageAlt: "/portfolio/portfolio-2.png",
+      images: [
+        "/portfolio/portfolio-1.png",
+        "/portfolio/portfolio-2.png",
+      ],
+      description: "Galeri portofolio interaktif dan modern untuk agensi pengembangan website. Memamerkan hasil karya dengan animasi transisi yang mulus, sistem filtering instan, dan integrasi formulir pemesanan responsif.",
+      stack: ["Next.js App Router", "Prisma ORM", "Neon PostgreSQL", "Framer Motion", "Tailwind CSS"],
+      testimonial: "Showcase portofolio interaktif ini meningkatkan kepercayaan klien baru secara signifikan sejak hari pertama rilis.",
+      before: "Daftar hasil karya agensi hanya berupa gambar statis berjejer yang membosankan",
+      after: "Galeri portofolio 3D modern dengan visualisasi dinamis dan alur order terintegrasi"
+    },
+    {
       id: "p1",
       title: "MeetDocu",
       category: "Company Profile",
@@ -325,24 +341,6 @@ export default function LandingPage({ packages, testimonials, blogs }: LandingPa
       testimonial: "Dokumentasi rapat kami menjadi sangat terorganisir. Tidak ada lagi file tersebar di berbagai folder!",
       before: "Dokumentasi meeting masih manual via file Word & folder tidak terstruktur",
       after: "Sistem pencatatan digital terpusat dengan akses aman berbasis role dan SSO"
-    },
-    {
-      id: "p2",
-      title: "Sistem Pelatihan Proxsis",
-      category: "Landing Page",
-      image: "/portfolio/webtraining-thumbnail.png",
-      imageAlt: "/portfolio/webtraining-2.png",
-      images: [
-        "/portfolio/webtraining-thumbnail.png",
-        "/portfolio/webtraining-1.png",
-        "/portfolio/webtraining-2.png",
-        "/portfolio/webtraining-3.png",
-      ],
-      description: "Platform manajemen pelatihan dan pengembangan SDM korporat. Menampilkan dashboard progress pelatihan real-time, jadwal training, tracking kehadiran, sertifikat digital, dan laporan pengembangan bulanan.",
-      stack: ["Next.js App Router", "Prisma ORM", "PostgreSQL", "Chart.js", "Tailwind CSS"],
-      testimonial: "Realisasi jam pelatihan karyawan naik 60% karena mudahnya memantau progress via dashboard.",
-      before: "Data pelatihan masih manual di spreadsheet Excel yang sulit dimonitor",
-      after: "Dashboard terpusat real-time dengan auto-reminder jadwal dan laporan analitik"
     },
     {
       id: "p3",
@@ -362,20 +360,22 @@ export default function LandingPage({ packages, testimonials, blogs }: LandingPa
       after: "Simulasi kalkulasi damage instan berbasis formula game asli 100% akurat"
     },
     {
-      id: "p4",
-      title: "WebCraft Studio Portfolio",
-      category: "Company Profile",
-      image: "/portfolio/portfolio-1.png",
-      imageAlt: "/portfolio/portfolio-2.png",
+      id: "p2",
+      title: "Sistem Pelatihan Proxsis",
+      category: "Landing Page",
+      image: "/portfolio/webtraining-thumbnail.png",
+      imageAlt: "/portfolio/webtraining-2.png",
       images: [
-        "/portfolio/portfolio-1.png",
-        "/portfolio/portfolio-2.png",
+        "/portfolio/webtraining-thumbnail.png",
+        "/portfolio/webtraining-1.png",
+        "/portfolio/webtraining-2.png",
+        "/portfolio/webtraining-3.png",
       ],
-      description: "Galeri portofolio interaktif dan modern untuk agensi pengembangan website. Memamerkan hasil karya dengan animasi transisi yang mulus, sistem filtering instan, dan integrasi formulir pemesanan responsif.",
-      stack: ["Next.js App Router", "Prisma ORM", "Neon PostgreSQL", "Framer Motion", "Tailwind CSS"],
-      testimonial: "Showcase portofolio interaktif ini meningkatkan kepercayaan klien baru secara signifikan sejak hari pertama rilis.",
-      before: "Daftar hasil karya agensi hanya berupa gambar statis berjejer yang membosankan",
-      after: "Galeri portofolio 3D modern dengan visualisasi dinamis dan alur order terintegrasi"
+      description: "Platform manajemen pelatihan dan pengembangan SDM korporat. Menampilkan dashboard progress pelatihan real-time, jadwal training, tracking kehadiran, sertifikat digital, dan laporan pengembangan bulanan.",
+      stack: ["Next.js App Router", "Prisma ORM", "PostgreSQL", "Chart.js", "Tailwind CSS"],
+      testimonial: "Realisasi jam pelatihan karyawan naik 60% karena mudahnya memantau progress via dashboard.",
+      before: "Data pelatihan masih manual di spreadsheet Excel yang sulit dimonitor",
+      after: "Dashboard terpusat real-time dengan auto-reminder jadwal dan laporan analitik"
     },
   ];
 
