@@ -1734,54 +1734,38 @@ export default function LandingPage({ packages, testimonials, blogs }: LandingPa
           </div>
         )}
 
-        {/* Toggle Button Container */}
-        <div className="flex items-center gap-3">
-          {/* External Bubble Label */}
-          {!chatOpen && (
-            <div 
-              style={{
-                backgroundColor: "#ffffff",
-                color: "#0f172a",
-                padding: "8px 14px",
-                borderRadius: "14px",
-                fontSize: "12px",
-                fontWeight: 700,
-                boxShadow: "0 4px 15px rgba(0,0,0,0.08)",
-                border: "1px solid #e2e8f0",
-                whiteSpace: "nowrap",
-                userSelect: "none"
-              }}
-            >
-              AI Assistant
-            </div>
-          )}
-
-          {/* Circular Toggle Button */}
-          <button
-            onClick={() => setChatOpen(o => !o)}
-            style={{
-              width: "56px", height: "56px", borderRadius: "50%",
-              background: chatOpen ? "linear-gradient(135deg,#6366f1,#8b5cf6)" : "linear-gradient(135deg,#22c55e,#16a34a)",
-              border: "none", cursor: "pointer",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              boxShadow: chatOpen ? "0 8px 24px rgba(99,102,241,0.5)" : "0 8px 24px rgba(34,197,94,0.4)",
-              transition: "all 0.3s cubic-bezier(0.34,1.56,0.64,1)",
-              transform: chatOpen ? "rotate(0deg)" : "rotate(0deg)",
-              animation: chatOpen ? "none" : "bounce 2s infinite",
-            }}
-            title={chatOpen ? "Tutup chat" : "Chat dengan kami"}
-          >
-            {chatOpen ? (
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round">
+        {/* Toggle Button */}
+        <button
+          onClick={() => setChatOpen(o => !o)}
+          style={{
+            height: "56px", borderRadius: "28px",
+            padding: "0 20px",
+            background: chatOpen ? "linear-gradient(135deg,#6366f1,#8b5cf6)" : "linear-gradient(135deg,#22c55e,#16a34a)",
+            border: "none", cursor: "pointer",
+            display: "flex", alignItems: "center", justifyContent: "center", gap: "8px",
+            boxShadow: chatOpen ? "0 8px 24px rgba(99,102,241,0.5)" : "0 8px 24px rgba(34,197,94,0.4)",
+            transition: "all 0.3s cubic-bezier(0.34,1.56,0.64,1)",
+            transform: chatOpen ? "rotate(0deg)" : "rotate(0deg)",
+            animation: chatOpen ? "none" : "bounce 2s infinite",
+          }}
+          title={chatOpen ? "Tutup chat" : "Chat dengan kami"}
+        >
+          {chatOpen ? (
+            <>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" style={{ flexShrink: 0 }}>
                 <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
               </svg>
-            ) : (
-              <svg className="w-6 h-6" fill="white" viewBox="0 0 24 24">
+              <span style={{ color: "#ffffff", fontSize: "13px", fontWeight: "bold", whiteSpace: "nowrap" }}>Tutup</span>
+            </>
+          ) : (
+            <>
+              <svg className="w-5.5 h-5.5" fill="white" viewBox="0 0 24 24" style={{ flexShrink: 0, width: "22px", height: "22px" }}>
                 <path d="M12.012 2c-5.506 0-9.988 4.482-9.988 9.988 0 1.761.459 3.473 1.332 4.978L2 22l5.244-1.373a9.92 9.92 0 0 0 4.768 1.218h.004c5.506 0 9.988-4.482 9.988-9.988 0-2.66-1.036-5.159-2.92-7.046C17.172 3.036 14.672 2 12.012 2z"/>
               </svg>
-            )}
-          </button>
-        </div>
+              <span style={{ color: "#ffffff", fontSize: "13px", fontWeight: "bold", whiteSpace: "nowrap" }}>AI Assistant</span>
+            </>
+          )}
+        </button>
       </div>
 
     </div>
