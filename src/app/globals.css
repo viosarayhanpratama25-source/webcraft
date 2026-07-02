@@ -1,26 +1,147 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@theme {
+  --color-slate-950: #f8fafc;
+  --color-slate-900: #ffffff;
+  --color-slate-850: #f1f5f9;
+  --color-slate-800: #e2e8f0;
+  --color-slate-750: #cbd5e1;
+  --color-slate-700: #94a3b8;
+  --color-slate-600: #64748b;
+  --color-slate-500: #475569;
+  --color-slate-400: #334155;
+  --color-slate-300: #1e293b;
+  --color-slate-200: #0f172a;
+  --color-slate-100: #020617;
+  
+  --color-indigo-950: #e0e7ff;
+  --color-indigo-900: #c7d2fe;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #f8fafc;
+  color: #0f172a;
+  font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* ==========================================
+   BULLETPROOF LIGHT THEME CLASS OVERRIDES
+   ========================================== */
+
+/* Backgrounds */
+.bg-slate-950 {
+  background-color: #f8fafc !important;
+}
+.bg-slate-900 {
+  background-color: #ffffff !important;
+}
+.bg-slate-900\/20 {
+  background-color: rgba(241, 245, 249, 0.5) !important;
+}
+.bg-slate-900\/40 {
+  background-color: rgba(255, 255, 255, 0.4) !important;
+}
+.bg-slate-900\/60 {
+  background-color: rgba(255, 255, 255, 0.6) !important;
+}
+.bg-slate-950\/80 {
+  background-color: rgba(248, 250, 252, 0.8) !important;
+}
+.bg-slate-950\/50 {
+  background-color: rgba(248, 250, 252, 0.5) !important;
+}
+.bg-slate-950\/40 {
+  background-color: rgba(248, 250, 252, 0.4) !important;
+}
+.bg-slate-900\/30 {
+  background-color: rgba(241, 245, 249, 0.3) !important;
+}
+
+/* Borders */
+.border-slate-800,
+.border-slate-850,
+.border-slate-900 {
+  border-color: #e2e8f0 !important;
+}
+
+/* Texts */
+.text-slate-100,
+.text-slate-200,
+.text-white {
+  color: #0f172a !important;
+}
+
+.text-slate-350,
+.text-slate-300,
+.text-slate-400 {
+  color: #475569 !important;
+}
+.text-slate-500 {
+  color: #64748b !important;
+}
+
+/* Active links and hover transitions */
+a.hover\:text-white:hover {
+  color: #6366f1 !important;
+}
+
+/* Stepper counter bubbles */
+span.bg-slate-800.text-slate-400 {
+  background-color: #f1f5f9 !important;
+  color: #64748b !important;
+}
+
+/* Form input styling */
+input, select, textarea {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
+}
+input::placeholder, textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Keep button / badge / gradient backgrounds text white ONLY for colored background elements */
+.bg-indigo-500,
+.bg-indigo-600,
+.bg-violet-500,
+.bg-emerald-500,
+.bg-indigo-500 *,
+.bg-indigo-600 *,
+.bg-violet-500 *,
+.bg-emerald-500 * {
+  color: #ffffff !important;
+}
+
+/* Keep gradient backgrounds text white unless they are transparent/clip text or light active links */
+a.bg-gradient-to-r:not(.text-transparent, .from-indigo-500\/10),
+span.bg-gradient-to-r:not(.text-transparent, .from-indigo-500\/10),
+div.bg-gradient-to-r:not(.text-transparent, .from-indigo-500\/10),
+button.bg-gradient-to-r:not(.text-transparent, .from-indigo-500\/10),
+a.bg-gradient-to-r:not(.text-transparent, .from-indigo-500\/10) *,
+span.bg-gradient-to-r:not(.text-transparent, .from-indigo-500\/10) *,
+div.bg-gradient-to-r:not(.text-transparent, .from-indigo-500\/10) *,
+button.bg-gradient-to-r:not(.text-transparent, .from-indigo-500\/10) * {
+  color: #ffffff !important;
+}
+
+/* Rich color for indigo text highlights and links in light theme */
+.text-indigo-400,
+.text-indigo-300 {
+  color: #4f46e5 !important;
+}
+
+/* Sidebar navigation active link text and icon colors */
+nav a.bg-gradient-to-r,
+nav a.bg-gradient-to-r * {
+  color: #4f46e5 !important;
+}
+
+/* Sidebar navigation inactive hover styling */
+nav a:not(.bg-gradient-to-r):hover {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+nav a:not(.bg-gradient-to-r):hover * {
+  color: #0f172a !important;
 }

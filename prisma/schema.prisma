@@ -1,0 +1,145 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+  engineType = "library"
+}
+
+model User {
+  id                  String               @id @default(cuid())
+  name                String
+  email               String               @unique
+  password            String
+  role                String               @default("CLIENT") // ADMIN, STAFF, CLIENT
+  avatar              String?
+  phone               String?
+  createdAt           DateTime             @default(now())
+  projects            Project[]
+  messages            ProjectMessage[]
+  testimonials        Testimonial[]
+  blogPosts           BlogPost[]
+}
+
+model Project {
+  id                  String               @id @default(cuid())
+  userId              String
+  user                User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title               String
+  description         String
+  type                String               // Company Profile, E-Commerce, Landing Page, Custom, Web Application, SEO Optimization, Maintenance
+  status              String               @default("PENDING") // PENDING, IN_PROGRESS, REVIEW, REVISION, COMPLETED, CANCELLED
+  budget              Float
+  deadline            DateTime
+  createdAt           DateTime             @default(now())
+  orders              ProjectOrder[]
+  milestones          ProjectMilestone[]
+  files               ProjectFile[]
+  messages            ProjectMessage[]
+  testimonials        Testimonial[]
+}
+
+model ProjectPackage {
+  id                  String               @id @default(cuid())
+  name                String
+  description         String
+  price               Float
+  features            String               // JSON string of features, e.g. '["1 page", "responsive", "basic SEO", "7 days"]'
+  deliveryTime        Int                  // In days
+  orders              ProjectOrder[]
+}
+
+model ProjectOrder {
+  id                  String               @id @default(cuid())
+  projectId           String
+  project             Project              @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  packageId           String
+  package             ProjectPackage       @relation(fields: [packageId], references: [id], onDelete: Cascade)
+  totalPrice          Float
+  paymentStatus       String               @default("UNPAID") // UNPAID, PARTIAL, PAID, REFUNDED
+  paymentMethod       String?              // Bank Transfer, Credit Card, E-Wallet
+  invoiceUrl          String?
+  createdAt           DateTime             @default(now())
+  invoices            Invoice[]
+}
+
+model ProjectMilestone {
+  id                  String               @id @default(cuid())
+  projectId           String
+  project             Project              @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  title               String
+  description         String
+  status              String               @default("TODO") // TODO, IN_PROGRESS, DONE
+  dueDate             DateTime
+  createdAt           DateTime             @default(now())
+}
+
+model ProjectFile {
+  id                  String               @id @default(cuid())
+  projectId           String
+  project             Project              @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  fileName            String
+  fileUrl             String
+  uploadedBy          String               // userId or "SYSTEM" or "ADMIN"
+  createdAt           DateTime             @default(now())
+}
+
+model ProjectMessage {
+  id                  String               @id @default(cuid())
+  projectId           String
+  project             Project              @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  senderId            String
+  sender              User                 @relation(fields: [senderId], references: [id], onDelete: Cascade)
+  message             String
+  attachments         String?              // JSON string of attachments
+  createdAt           DateTime             @default(now())
+}
+
+model Invoice {
+  id                  String               @id @default(cuid())
+  orderId             String
+  order               ProjectOrder         @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  invoiceNumber       String               @unique
+  amount              Float
+  dueDate             DateTime
+  status              String               @default("UNPAID") // UNPAID, PAID
+  pdfUrl              String?
+  createdAt           DateTime             @default(now())
+}
+
+model Testimonial {
+  id                  String               @id @default(cuid())
+  userId              String
+  user                User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  projectId           String
+  project             Project              @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  rating              Int                  // 1-5
+  content             String
+  isPublished         Boolean              @default(false)
+  createdAt           DateTime             @default(now())
+}
+
+model BlogPost {
+  id                  String               @id @default(cuid())
+  title               String
+  slug                String               @unique
+  content             String
+  coverImage          String?
+  authorId            String
+  author              User                 @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  status              String               @default("DRAFT") // DRAFT, PUBLISHED
+  publishedAt         DateTime?
+  createdAt           DateTime             @default(now())
+}
+
+model ContactSubmission {
+  id                  String               @id @default(cuid())
+  name                String
+  email               String
+  phone               String?
+  message             String
+  serviceType         String               // Website Company Profile, E-Commerce, Landing Page, Custom, Web Application, SEO Optimization, Maintenance
+  status              String               @default("NEW") // NEW, IN_PROGRESS, RESOLVED
+  createdAt           DateTime             @default(now())
+}
