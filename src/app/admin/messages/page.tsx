@@ -9,7 +9,7 @@ export default async function AdminMessagesPage() {
     orderBy: { createdAt: "desc" }
   });
 
-  const formattedSubmissions = submissions.map(sub => ({
+  const formattedSubmissions = submissions.map((sub: any) => ({
     id: sub.id,
     name: sub.name,
     email: sub.email,

@@ -22,7 +22,7 @@ export default async function AdminInvoicesPage() {
     }
   });
 
-  const formattedInvoices = invoices.map(inv => ({
+  const formattedInvoices = invoices.map((inv: any) => ({
     id: inv.id,
     invoiceNumber: inv.invoiceNumber,
     amount: inv.amount,

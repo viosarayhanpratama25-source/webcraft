@@ -19,7 +19,7 @@ export default async function AdminProjectsPage() {
   });
 
   // Format projects data for the client component
-  const formattedProjects = projects.map(proj => ({
+  const formattedProjects = projects.map((proj: any) => ({
     id: proj.id,
     title: proj.title,
     description: proj.description,

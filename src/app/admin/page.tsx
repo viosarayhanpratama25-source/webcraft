@@ -105,7 +105,7 @@ export default async function AdminOverviewPage() {
                 </tr>
               </thead>
               <tbody className="divide-y" style={{ borderColor: "#f1f5f9" }}>
-                {recentProjects.map((proj) => (
+                {recentProjects.map((proj: any) => (
                   <tr key={proj.id} className="hover:bg-slate-50 transition-colors">
                     <td className="py-3 font-bold" style={{ color: "#0f172a" }}>
                       <Link href={`/admin/projects#${proj.id}`} className="hover:underline">
@@ -150,7 +150,7 @@ export default async function AdminOverviewPage() {
             {recentInquiries.length === 0 ? (
               <p className="text-xs text-slate-400 text-center py-6">Belum ada pesan masuk.</p>
             ) : (
-              recentInquiries.map((inq) => (
+              recentInquiries.map((inq: any) => (
                 <div key={inq.id} className="p-3 border rounded-xl space-y-2 text-xs" style={{ backgroundColor: "#f8fafc", borderColor: "#e2e8f0" }}>
                   <div className="flex items-center justify-between">
                     <span className="font-bold" style={{ color: "#0f172a" }}>{inq.name}</span>
