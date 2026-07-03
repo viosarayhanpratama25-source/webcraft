@@ -1,9 +1,36 @@
 const { PrismaClient } = require("@prisma/client");
-const { PrismaBetterSqlite3 } = require("@prisma/adapter-better-sqlite3");
 const bcrypt = require("bcryptjs");
+const dotenv = require("dotenv");
+const path = require("path");
 
-const adapter = new PrismaBetterSqlite3({ url: "file:dev.db" });
-const prisma = new PrismaClient({ adapter });
+// Load environment variables from project root .env
+dotenv.config({ path: path.join(__dirname, "../.env") });
+
+const dbUrl = process.env.DATABASE_URL || "";
+let prisma;
+
+if (dbUrl.startsWith("file:") || dbUrl.includes(".db") || !dbUrl) {
+  try {
+    const { PrismaBetterSqlite3 } = require("@prisma/adapter-better-sqlite3");
+    const adapter = new PrismaBetterSqlite3({ url: dbUrl || "file:dev.db" });
+    prisma = new PrismaClient({ adapter });
+  } catch (e) {
+    console.warn("Failing back to standard PrismaClient:", e);
+    prisma = new PrismaClient();
+  }
+} else {
+  // PostgreSQL configuration using Prisma 7 Pg adapter
+  try {
+    const { Pool } = require("pg");
+    const { PrismaPg } = require("@prisma/adapter-pg");
+    const pool = new Pool({ connectionString: dbUrl });
+    const adapter = new PrismaPg(pool);
+    prisma = new PrismaClient({ adapter });
+  } catch (e) {
+    console.error("Failed to load PostgreSQL adapter:", e);
+    prisma = new PrismaClient();
+  }
+}
 
 async function main() {
   console.log("Seeding database...");
@@ -26,21 +53,21 @@ async function main() {
     {
       name: "Starter",
       description: "Cocok untuk portofolio, landing page sederhana, atau CV online.",
-      price: 2500000,
+      price: 1500000,
       features: JSON.stringify([
         "1 Halaman (Landing Page)",
         "Desain Responsive (Mobile & Desktop)",
         "Basic SEO Optimization",
         "Pengerjaan 7 Hari",
         "Gratis Domain & Hosting 1 Tahun",
-        "Support via Email"
+        "Free Support & Maintenance 6 Bulan"
       ]),
       deliveryTime: 7,
     },
     {
       name: "Professional",
       description: "Solusi terbaik untuk bisnis UKM, profile perusahaan, atau blog dinamis.",
-      price: 7500000,
+      price: 5000000,
       features: JSON.stringify([
         "Hingga 5 Halaman Utama",
         "Integrasi CMS (Mudah Edit Konten)",
@@ -48,14 +75,14 @@ async function main() {
         "Form Kontak & Integrasi WhatsApp",
         "Pengerjaan 14 Hari",
         "Gratis Domain & Hosting Premium 1 Tahun",
-        "Priority Support & Maintenance 3 Bulan"
+        "Priority Support & Maintenance 6 Bulan"
       ]),
       deliveryTime: 14,
     },
     {
       name: "Enterprise",
       description: "Untuk sistem e-commerce kustom, aplikasi web kompleks, atau integrasi API.",
-      price: 15000000,
+      price: 10000000,
       features: JSON.stringify([
         "Halaman Tidak Terbatas (Kustom)",
         "Fullstack Web App / E-Commerce",
@@ -125,7 +152,7 @@ async function main() {
       description: "Pembuatan website e-commerce dengan katalog produk hijab, keranjang belanja, dan integrasi pembayaran lokal.",
       type: "E-Commerce",
       status: "IN_PROGRESS",
-      budget: 7500000,
+      budget: 5000000,
       deadline: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000), // 10 days from now
     },
   });
@@ -135,7 +162,7 @@ async function main() {
     data: {
       projectId: project.id,
       packageId: createdPackages[1].id, // Professional package
-      totalPrice: 7500000,
+      totalPrice: 5000000,
       paymentStatus: "PAID",
       paymentMethod: "Credit Card",
       invoiceUrl: "/invoices/INV-2026-001.pdf",
@@ -147,7 +174,7 @@ async function main() {
     data: {
       orderId: order.id,
       invoiceNumber: "INV-2026-001",
-      amount: 7500000,
+      amount: 5000000,
       dueDate: new Date(),
       status: "PAID",
       pdfUrl: "/invoices/INV-2026-001.pdf",

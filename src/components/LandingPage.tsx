@@ -36,6 +36,7 @@ interface BlogProps {
   content: string;
   coverImage: string | null;
   publishedAt: string;
+  url?: string;
 }
 
 // Draggable Image Carousel Component
@@ -361,7 +362,7 @@ export default function LandingPage({ packages, testimonials, blogs }: LandingPa
     },
     {
       id: "p2",
-      title: "Sistem Pelatihan Proxsis",
+      title: "Training Record",
       category: "Landing Page",
       image: "/portfolio/webtraining-thumbnail.png",
       imageAlt: "/portfolio/webtraining-2.png",
@@ -390,7 +391,7 @@ export default function LandingPage({ packages, testimonials, blogs }: LandingPa
     { q: "Apakah website yang dibuat bisa diedit sendiri nantinya?", a: "Ya! Untuk Paket Professional dan Enterprise, kami mengintegrasikan Sistem Manajemen Konten (CMS) yang memudahkan Anda menambah, mengedit, atau menghapus teks dan gambar tanpa perlu memahami kode pemrograman." },
     { q: "Bagaimana dengan sistem pembayarannya?", a: "Pembayaran dapat dicicil 2 kali (DP 50% di awal dan pelunasan 50% setelah website selesai ditesting dan siap dirilis), atau pembayaran penuh melalui gateway aman (Midtrans/Stripe) di dashboard." },
     { q: "Apakah website sudah SEO Friendly?", a: "Tentu saja. Semua website dirancang mengikuti praktik SEO terbaik meliputi struktur tag HTML yang tepat, optimasi kecepatan, kompresi gambar, skema metadata, dan submit sitemap ke Google Search Console." },
-    { q: "Apakah ada garansi jika website mengalami error?", a: "Ya, kami memberikan garansi pemeliharaan (maintenance) gratis terhadap error atau bug sistem selama 3 bulan pertama setelah website diluncurkan." },
+    { q: "Apakah ada garansi jika website mengalami error?", a: "Ya, kami memberikan garansi pemeliharaan (maintenance) gratis terhadap error atau bug sistem selama 6 bulan pertama setelah website diluncurkan." },
     { q: "Bagaimana cara melakukan revisi desain?", a: "Proses revisi dilakukan pada tahap wireframe dan desain UI/UX sebelum coding dimulai. Paket Starter mendapat 2x revisi, Professional 3x, dan Enterprise mendapat revisi tidak terbatas." },
     { q: "Apakah WebCraft melayani custom web application?", a: "Ya, kami melayani pembuatan sistem kustom seperti dashboard internal, e-learning, portal agen, sistem booking, dan integrasi pihak ketiga pada Paket Enterprise." }
   ];
@@ -1504,7 +1505,9 @@ export default function LandingPage({ packages, testimonials, blogs }: LandingPa
                     <div className="p-6 space-y-3">
                       <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{blog.publishedAt}</span>
                       <h4 className="text-base font-bold text-white line-clamp-2 hover:text-indigo-400 transition-colors">
-                        <Link href="#">{blog.title}</Link>
+                        <Link href={blog.url || "#"} target={blog.url ? "_blank" : undefined} rel={blog.url ? "noopener noreferrer" : undefined}>
+                          {blog.title}
+                        </Link>
                       </h4>
                       <p className="text-slate-400 text-xs leading-relaxed line-clamp-3">
                         {blog.content}
@@ -1512,7 +1515,12 @@ export default function LandingPage({ packages, testimonials, blogs }: LandingPa
                     </div>
                   </div>
                   <div className="px-6 pb-6 pt-2">
-                    <Link href="#" className="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-400 hover:text-indigo-300">
+                    <Link 
+                      href={blog.url || "#"} 
+                      target={blog.url ? "_blank" : undefined} 
+                      rel={blog.url ? "noopener noreferrer" : undefined} 
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-400 hover:text-indigo-300"
+                    >
                       Baca Selengkapnya
                       <ArrowRight className="w-4.5 h-4.5 w-4 h-4" />
                     </Link>

@@ -18,7 +18,7 @@ export default function OrderDetailsPage() {
   const [websiteType, setWebsiteType] = useState("Website Company Profile");
   const [description, setDescription] = useState("");
   const [referenceUrls, setReferenceUrls] = useState<string[]>([""]);
-  const [budget, setBudget] = useState(2500000);
+  const [budget, setBudget] = useState(1500000);
   const [deadline, setDeadline] = useState("");
   const [features, setFeatures] = useState<string[]>([]);
   const [fileUrl, setFileUrl] = useState("");

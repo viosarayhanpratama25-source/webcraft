@@ -10,18 +10,18 @@ Tugas kamu:
 
 Informasi WebCraft:
 - Layanan: Website Company Profile, E-Commerce / Toko Online, Landing Page, Web App Custom
-- Harga mulai dari Rp 1.5 juta (paket Starter) hingga Rp 8 juta+ (paket Enterprise)
+- Harga mulai dari Rp 1.5 juta (paket Starter) hingga Rp 10 juta+ (paket Enterprise)
 - Estimasi pengerjaan: 5–20 hari kerja tergantung kompleksitas
 - Revisi: 2–5 kali (tergantung paket)
 - Teknologi: Next.js, React, Tailwind CSS, Node.js, PostgreSQL, Prisma
-- Garansi: support 30 hari setelah website live
+- Garansi: free support & maintenance 6 bulan setelah website live
 - Kontak: WhatsApp 089501113573`;
 
 // Rule-based fallback responses
 const RULES: Array<{ keywords: string[]; reply: string }> = [
   {
     keywords: ["harga", "biaya", "berapa", "cost", "tarif", "bayar"],
-    reply: "Harga paket WebCraft mulai dari:\n\n🟢 **Starter** — Rp 1,5 jt (Company Profile sederhana, 5 hari kerja)\n🔵 **Professional** — Rp 3,5 jt (E-Commerce / Landing Page, 10 hari kerja)\n🟣 **Enterprise** — Rp 8 jt+ (Web App Custom, 20 hari kerja)\n\nSemua paket sudah termasuk domain + hosting 1 tahun! Mau lihat detail fiturnya?",
+    reply: "Harga paket WebCraft mulai dari:\n\n🟢 **Starter** — Rp 1,5 jt (Company Profile sederhana, 5 hari kerja)\n🔵 **Professional** — Rp 5 jt (E-Commerce / Landing Page, 10 hari kerja)\n🟣 **Enterprise** — Rp 10 jt+ (Web App Custom, 20 hari kerja)\n\nSemua paket sudah termasuk domain + hosting 1 tahun! Mau lihat detail fiturnya?",
   },
   {
     keywords: ["lama", "waktu", "hari", "durasi", "selesai", "pengerjaan"],
@@ -37,7 +37,7 @@ const RULES: Array<{ keywords: string[]; reply: string }> = [
   },
   {
     keywords: ["garansi", "support", "after", "setelah", "maintenance"],
-    reply: "Kami memberikan **garansi support 30 hari** setelah website live — gratis!\n\nMeliputi:\n🛡️ Bug fix & perbaikan error\n📞 Konsultasi teknis via WhatsApp\n🔧 Pembaruan minor konten\n\nSetelah 30 hari, tersedia paket maintenance bulanan.",
+    reply: "Kami memberikan **garansi free support & maintenance 6 bulan** setelah website live — gratis untuk semua paket!\n\nMeliputi:\n🛡️ Bug fix & perbaikan error\n📞 Konsultasi teknis via WhatsApp\n🔧 Pembaruan minor konten\n\nSetelah 6 bulan, tersedia paket maintenance bulanan.",
   },
   {
     keywords: ["portofolio", "contoh", "hasil", "karya", "proyek"],

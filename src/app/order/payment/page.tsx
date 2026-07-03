@@ -34,7 +34,7 @@ function OrderPaymentContent() {
     }
 
     setOrderId(stashedOrderId);
-    setAmount(stashedAmount || "7500000");
+    setAmount(stashedAmount || "5000000");
     setInvoiceNumber(stashedInvoice || "INV-2026-002");
   }, [router, searchParams]);
 
