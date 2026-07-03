@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "WebCraft — Jasa Pembuatan Website & Aplikasi Web Profesional",
-  description: "Wujudkan website impian Anda bersama WebCraft. Kami melayani pembuatan Landing Page, E-Commerce, Company Profile, dan Aplikasi Web kustom dengan performa maksimal dan desain premium.",
-  keywords: "jasa pembuatan website, website development, e-commerce, company profile, webcraft, software agency indonesia",
+  title: "cleavCraft — Jasa Pembuatan Website & Aplikasi Web Profesional",
+  description: "Wujudkan website impian Anda bersama cleavCraft. Kami melayani pembuatan Landing Page, E-Commerce, Company Profile, dan Aplikasi Web kustom dengan performa maksimal dan desain premium.",
+  keywords: "jasa pembuatan website, website development, e-commerce, company profile, cleavcraft, software agency indonesia",
 };
 
 export default function RootLayout({

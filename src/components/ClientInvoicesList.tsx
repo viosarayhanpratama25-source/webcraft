@@ -109,7 +109,7 @@ export default function ClientInvoicesList({ initialInvoices }: { initialInvoice
                     </button>
                     {!isPaid && (
                       <button
-                        onClick={() => alert(`Lakukan transfer sebesar Rp ${inv.amount.toLocaleString()} ke Bank BCA Rek: 123456789 a.n WebCraft Indonesia. Konfirmasi otomatis akan diverifikasi tim kami.`)}
+                        onClick={() => alert(`Lakukan transfer sebesar Rp ${inv.amount.toLocaleString()} ke Bank BCA Rek: 123456789 a.n cleavCraft Indonesia. Konfirmasi otomatis akan diverifikasi tim kami.`)}
                         className="px-3.5 py-2 bg-gradient-to-r from-indigo-500 to-violet-500 hover:from-indigo-600 hover:to-violet-600 text-white font-semibold rounded-xl text-xs shadow shadow-indigo-500/10 transition-all"
                       >
                         Bayar
@@ -163,7 +163,7 @@ export default function ClientInvoicesList({ initialInvoices }: { initialInvoice
                 {/* Header */}
                 <div className="flex justify-between items-start border-b border-slate-800/80 pb-6 print:border-slate-300">
                   <div>
-                    <h3 className="text-lg font-bold tracking-wider uppercase text-white print:text-black">WEBCRAFT</h3>
+                    <h3 className="text-lg font-bold tracking-wider uppercase text-white print:text-black">CLEAVCRAFT</h3>
                     <p className="text-[10px] text-slate-500 print:text-slate-600 mt-1 max-w-xs leading-relaxed">
                       Jasa Pembuatan Website & Aplikasi Web Kustom Premium. SCBD, Jakarta, Indonesia.
                     </p>
@@ -178,7 +178,7 @@ export default function ClientInvoicesList({ initialInvoices }: { initialInvoice
                 <div className="grid grid-cols-2 gap-6 text-xs border-b border-slate-800/80 pb-6 print:border-slate-300">
                   <div>
                     <span className="text-slate-500 font-bold uppercase tracking-wider block">Ditagihkan Kepada:</span>
-                    <h5 className="font-bold text-white print:text-slate-900 mt-1.5 block">Klien WebCraft</h5>
+                    <h5 className="font-bold text-white print:text-slate-900 mt-1.5 block">Klien cleavCraft</h5>
                     <p className="text-[10px] text-slate-400 print:text-slate-500 mt-0.5 leading-normal">
                       Proyek: {selectedInvoice.projectTitle}
                     </p>
@@ -235,8 +235,8 @@ export default function ClientInvoicesList({ initialInvoices }: { initialInvoice
                       {selectedInvoice.paymentMethod}
                     </span>
                     <p className="text-[9px] text-slate-500 print:text-slate-600 mt-1.5 leading-relaxed">
-                      Plese transfer to Bank BCA Rek: 123456789 a.n WebCraft. <br />
-                      Invoice ini sah diterbitkan secara digital oleh sistem WebCraft.
+                      Please transfer to Bank BCA Rek: 123456789 a.n cleavCraft. <br />
+                      Invoice ini sah diterbitkan secara digital oleh sistem cleavCraft.
                     </p>
                   </div>
                   <div className="text-right self-end">

@@ -35,9 +35,11 @@ export default function ForgotPasswordPage() {
             <span className="p-2 bg-gradient-to-tr from-indigo-500 to-violet-500 rounded-xl shadow-lg shadow-indigo-500/20">
               <Activity className="w-6 h-6 text-white" />
             </span>
-            Web<span className="bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">Craft</span>
+            <span>
+              cleav<span className="bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">Craft</span>
+            </span>
           </Link>
-          <p className="text-slate-400 text-sm">Kembalikan akses masuk akun WebCraft Anda</p>
+          <p className="text-slate-400 text-sm">Kembalikan akses masuk akun cleavCraft Anda</p>
         </div>
 
         {/* Card */}

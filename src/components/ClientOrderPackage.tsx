@@ -56,7 +56,7 @@ export default function ClientOrderPackage({ packages }: { packages: PackageProp
             <span className="p-2 bg-gradient-to-tr from-indigo-500 to-violet-500 rounded-xl">
               <Activity className="w-5 h-5 text-white" />
             </span>
-            WebCraft
+            cleavCraft
           </Link>
           <Link href="/" className="text-xs text-slate-400 hover:text-white flex items-center gap-1.5 transition-colors">
             <ArrowLeft className="w-3.5 h-3.5" />

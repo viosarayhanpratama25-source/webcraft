@@ -96,7 +96,7 @@ function OrderPaymentContent() {
             <span className="p-2 bg-gradient-to-tr from-indigo-500 to-violet-500 rounded-xl">
               <Activity className="w-5 h-5 text-white" />
             </span>
-            WebCraft
+            cleavCraft
           </Link>
           <span className="text-xs text-slate-500 font-semibold">Proses Checkout Pembayaran</span>
         </div>
@@ -202,7 +202,7 @@ function OrderPaymentContent() {
             <div>
               <h4 className="font-bold text-indigo-300">Transaksi Dijamin Aman</h4>
               <p className="text-[10px] text-slate-400 mt-0.5 leading-relaxed">
-                Seluruh aktivitas transaksi pembayaran dan enkripsi data di WebCraft dilindungi sistem enkripsi SSL tingkat tinggi serta gateway bersertifikasi PCI-DSS.
+                Seluruh aktivitas transaksi pembayaran dan enkripsi data di cleavCraft dilindungi sistem enkripsi SSL tingkat tinggi serta gateway bersertifikasi PCI-DSS.
               </p>
             </div>
           </div>

@@ -44,7 +44,7 @@ export default function OrderSuccessPage() {
         ? parsedDetails.features.join(", ") 
         : "-";
       
-      const message = `Halo WebCraft! 🚀
+      const message = `Halo cleavCraft! 🚀
 Saya ingin mengonfirmasi pesanan website saya yang baru saja dibuat. Berikut rincian data lengkap website saya:
 
 📄 NO. INVOICE: ${lastInvoice}
@@ -61,7 +61,7 @@ Mohon segera diproses lebih lanjut. Terima kasih!`;
       const encodedMessage = encodeURIComponent(message);
       setWaLink(`https://wa.me/${waNumber}?text=${encodedMessage}`);
     } else {
-      setWaLink(`https://wa.me/6289501113573?text=${encodeURIComponent("Halo WebCraft! Saya ingin melakukan konfirmasi pesanan website.")}`);
+      setWaLink(`https://wa.me/6289501113573?text=${encodeURIComponent("Halo cleavCraft! Saya ingin melakukan konfirmasi pesanan website.")}`);
     }
   }, []);
 
@@ -88,7 +88,7 @@ Mohon segera diproses lebih lanjut. Terima kasih!`;
             <span className="p-2 rounded-xl" style={{ background: "linear-gradient(135deg, #6366f1, #8b5cf6)" }}>
               <Activity className="w-5 h-5 text-white" />
             </span>
-            WebCraft
+            cleavCraft
           </div>
 
           {/* Success Check circle */}

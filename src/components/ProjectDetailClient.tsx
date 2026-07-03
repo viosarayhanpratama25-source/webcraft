@@ -471,7 +471,7 @@ export default function ProjectDetailClient({ project, currentUser }: ProjectDet
                 <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
                 <span className="font-bold text-white">Saluran Obrolan Proyek</span>
               </div>
-              <span className="text-slate-500">Klien ↔ Tim WebCraft</span>
+              <span className="text-slate-500">Klien ↔ Tim cleavCraft</span>
             </div>
 
             {/* Chat Body */}
@@ -530,7 +530,7 @@ export default function ProjectDetailClient({ project, currentUser }: ProjectDet
                 type="text"
                 value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
-                placeholder="Tulis pesan ke tim WebCraft..."
+                placeholder="Tulis pesan ke tim cleavCraft..."
                 className="flex-1 px-4 py-3 bg-slate-950/60 border border-slate-800 rounded-xl focus:border-indigo-500 focus:outline-none text-xs text-slate-200 placeholder-slate-600"
               />
               <button

@@ -21,7 +21,12 @@ const createPrismaClient = () => {
   try {
     const { Pool } = require("pg");
     const { PrismaPg } = require("@prisma/adapter-pg");
-    const pool = new Pool({ connectionString: dbUrl });
+    const pool = new Pool({ 
+      connectionString: dbUrl,
+      max: 10,                  // Maximum number of connections in the pool
+      idleTimeoutMillis: 30000, // Close idle connections after 30 seconds
+      connectionTimeoutMillis: 2000 // Abort if connection takes longer than 2 seconds
+    });
     const adapter = new PrismaPg(pool);
     return new PrismaClient({ adapter });
   } catch (e) {

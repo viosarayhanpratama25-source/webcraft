@@ -269,7 +269,7 @@ export default async function DashboardPage() {
                           <span className="font-bold text-white">{msg.sender.name}</span>
                           {isAdmin && (
                             <span className="text-[9px] font-extrabold text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-1.5 py-0.5 rounded">
-                              Tim WebCraft
+                              Tim cleavCraft
                             </span>
                           )}
                         </div>

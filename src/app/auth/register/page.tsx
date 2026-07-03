@@ -87,7 +87,9 @@ export default function RegisterPage() {
             <span className="p-2 bg-gradient-to-tr from-indigo-500 to-violet-500 rounded-xl shadow-lg shadow-indigo-500/20">
               <Activity className="w-6 h-6 text-white" />
             </span>
-            Web<span className="bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">Craft</span>
+            <span>
+              cleav<span className="bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">Craft</span>
+            </span>
           </Link>
           <p className="text-slate-400 text-sm">Daftar akun baru untuk mulai memanage proyek</p>
         </div>
@@ -231,7 +233,7 @@ export default function RegisterPage() {
                 <Link href="#" className="text-indigo-400 hover:underline">
                   Kebijakan Privasi
                 </Link>{" "}
-                yang berlaku di WebCraft.
+                yang berlaku di cleavCraft.
               </label>
             </div>
 

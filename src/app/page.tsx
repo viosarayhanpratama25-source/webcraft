@@ -5,9 +5,19 @@ import LandingPage from "@/components/LandingPage";
 export const revalidate = 60; // Revalidate every minute
 
 export default async function Home() {
-  // Fetch packages, testimonials, and blog posts from SQLite db
   const packages = await db.projectPackage.findMany();
   
+  const packagesData = packages.map(pkg => ({
+    id: pkg.id,
+    name: pkg.name,
+    description: pkg.description,
+    price: pkg.price,
+    features: JSON.parse(pkg.features),
+    deliveryTime: pkg.deliveryTime
+  }));
+  
+  /* 
+  // Testimonial query is disabled for performance optimization (currently inactive in UI)
   const testimonials = await db.testimonial.findMany({
     where: { isPublished: true },
     include: {
@@ -26,16 +36,6 @@ export default async function Home() {
     }
   });
 
-  // Map and structure data for packages and testimonials
-  const packagesData = packages.map(pkg => ({
-    id: pkg.id,
-    name: pkg.name,
-    description: pkg.description,
-    price: pkg.price,
-    features: JSON.parse(pkg.features),
-    deliveryTime: pkg.deliveryTime
-  }));
-
   const testimonialsData = testimonials.map(t => ({
     id: t.id,
     name: t.user.name,
@@ -44,18 +44,26 @@ export default async function Home() {
     rating: t.rating,
     quote: t.content
   }));
+  */
+  const testimonialsData: any[] = [];
 
   // Fetch external developer articles via public Dev.to API (100% legal, officially supported)
   // Queries "indonesia" topic to get relevant developer articles in Indonesian language.
   // Falls back to local database articles in case of offline development or API failure.
   let blogsData = [];
   try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 2000); // 2-second timeout limit
+
     const res = await fetch("https://dev.to/api/articles?tag=indonesia&per_page=3", {
       next: { revalidate: 3600 }, // Cache for 1 hour
+      signal: controller.signal,
       headers: {
-        "User-Agent": "WebCraft-App/1.0"
+        "User-Agent": "cleavCraft-App/1.0"
       }
     });
+    clearTimeout(timeoutId);
+
     if (!res.ok) throw new Error("Failed to load dev.to articles");
     
     const devToArticles = await res.json();

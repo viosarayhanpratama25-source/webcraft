@@ -233,7 +233,7 @@ export default function DashboardLayoutClient({ children, user }: DashboardLayou
                     <span style={{ padding: "0.5rem", background: "linear-gradient(135deg, #6366f1, #8b5cf6)", borderRadius: "0.75rem" }}>
                       <Activity className="w-5 h-5" style={{ color: "#ffffff" }} />
                     </span>
-                    <span style={{ fontSize: "1.25rem", fontWeight: 800, color: "#0f172a" }}>WebCraft</span>
+                    <span style={{ fontSize: "1.25rem", fontWeight: 800, color: "#0f172a" }}>cleavCraft</span>
                   </Link>
                   <button onClick={() => setMobileSidebarOpen(false)} style={{ color: "#64748b", background: "none", border: "none", cursor: "pointer" }}>
                     <X className="w-5 h-5" />
@@ -327,7 +327,7 @@ export default function DashboardLayoutClient({ children, user }: DashboardLayou
               <Menu className="w-5 h-5" />
             </button>
             <div className="hidden sm:block" style={{ fontSize: "11px", fontWeight: 700, color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.1em" }}>
-              Portal Klien WebCraft
+              Portal Klien cleavCraft
             </div>
           </div>
 

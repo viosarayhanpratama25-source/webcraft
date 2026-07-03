@@ -204,7 +204,7 @@ export default function LandingPage({ packages, testimonials, blogs }: LandingPa
   const [chatOpen, setChatOpen] = useState(false);
   const [chatMessages, setChatMessages] = useState<Array<{role:"user"|"bot", text:string, time:string}>>([{
     role: "bot",
-    text: "Halo! 👋 Saya **WebCraft AI**, asisten virtual Anda. Saya siap membantu menjawab pertanyaan seputar layanan, harga, dan proses pembuatan website. Ada yang bisa saya bantu?",
+    text: "Halo! 👋 Saya **cleavCraft AI**, asisten virtual Anda. Saya siap membantu menjawab pertanyaan seputar layanan, harga, dan proses pembuatan website. Ada yang bisa saya bantu?",
     time: new Date().toLocaleTimeString("id-ID", {hour:"2-digit",minute:"2-digit"})
   }]);
   const [chatInput, setChatInput] = useState("");
@@ -236,7 +236,7 @@ export default function LandingPage({ packages, testimonials, blogs }: LandingPa
     }
   };
   const quickChips = ["Berapa harga website?", "Berapa lama pengerjaannya?", "Apa saja yang termasuk?", "Apakah ada revisi?"];
-  const waOrderUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Halo WebCraft! Saya tertarik untuk memesan layanan pembuatan website. Bisa bantu saya?")}`;
+  const waOrderUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Halo cleavCraft! Saya tertarik untuk memesan layanan pembuatan website. Bisa bantu saya?")}`;
   const formatBotText = (text: string) => text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
 
   // Contact Form State
@@ -311,7 +311,7 @@ export default function LandingPage({ packages, testimonials, blogs }: LandingPa
   const portfolios = [
     {
       id: "p4",
-      title: "WebCraft Studio Portfolio",
+      title: "cleavCraft Studio Portfolio",
       category: "Company Profile",
       image: "/portfolio/portfolio-1.png",
       imageAlt: "/portfolio/portfolio-2.png",
@@ -393,7 +393,7 @@ export default function LandingPage({ packages, testimonials, blogs }: LandingPa
     { q: "Apakah website sudah SEO Friendly?", a: "Tentu saja. Semua website dirancang mengikuti praktik SEO terbaik meliputi struktur tag HTML yang tepat, optimasi kecepatan, kompresi gambar, skema metadata, dan submit sitemap ke Google Search Console." },
     { q: "Apakah ada garansi jika website mengalami error?", a: "Ya, kami memberikan garansi pemeliharaan (maintenance) gratis terhadap error atau bug sistem selama 6 bulan pertama setelah website diluncurkan." },
     { q: "Bagaimana cara melakukan revisi desain?", a: "Proses revisi dilakukan pada tahap wireframe dan desain UI/UX sebelum coding dimulai. Paket Starter mendapat 2x revisi, Professional 3x, dan Enterprise mendapat revisi tidak terbatas." },
-    { q: "Apakah WebCraft melayani custom web application?", a: "Ya, kami melayani pembuatan sistem kustom seperti dashboard internal, e-learning, portal agen, sistem booking, dan integrasi pihak ketiga pada Paket Enterprise." }
+    { q: "Apakah cleavCraft melayani custom web application?", a: "Ya, kami melayani pembuatan sistem kustom seperti dashboard internal, e-learning, portal agen, sistem booking, dan integrasi pihak ketiga pada Paket Enterprise." }
   ];
 
   return (
@@ -407,7 +407,9 @@ export default function LandingPage({ packages, testimonials, blogs }: LandingPa
             <span className="p-2 bg-gradient-to-tr from-indigo-500 to-violet-500 rounded-xl shadow-md shadow-indigo-500/10">
               <Activity className="w-5 h-5 text-white animate-pulse" />
             </span>
-            Web<span className="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">Craft</span>
+            <span>
+              cleav<span className="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">Craft</span>
+            </span>
           </Link>
 
           {/* Desktop Navigation Links */}
@@ -1347,7 +1349,7 @@ export default function LandingPage({ packages, testimonials, blogs }: LandingPa
                 </div>
                 <div>
                   <h4 className="text-sm font-bold text-white">Kirim Email</h4>
-                  <p className="text-sm text-slate-400 mt-0.5">halo@webcraft.com</p>
+                   <p className="text-sm text-slate-400 mt-0.5">halo@cleavcraft.com</p>
                 </div>
               </div>
 
@@ -1373,7 +1375,7 @@ export default function LandingPage({ packages, testimonials, blogs }: LandingPa
                   </div>
                   <h3 className="text-xl font-bold text-white">Pesan Terkirim!</h3>
                   <p className="text-slate-400 text-sm max-w-sm mx-auto leading-relaxed">
-                    Terima kasih telah menghubungi WebCraft. Pesan Anda sudah kami terima dan tim sales kami akan segera menghubungi Anda kembali.
+                    Terima kasih telah menghubungi cleavCraft. Pesan Anda sudah kami terima dan tim sales kami akan segera menghubungi Anda kembali.
                   </p>
                   <button
                     onClick={() => setContactSuccess(false)}
@@ -1481,7 +1483,7 @@ export default function LandingPage({ packages, testimonials, blogs }: LandingPa
         <section className="py-24 bg-slate-900/20 border-t border-slate-900 relative">
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center max-w-2xl mx-auto mb-16 space-y-4">
-              <h2 className="text-xs font-bold uppercase tracking-wider text-indigo-400">Blog WebCraft</h2>
+              <h2 className="text-xs font-bold uppercase tracking-wider text-indigo-400">Blog cleavCraft</h2>
               <h3 className="text-3xl sm:text-4xl font-extrabold text-white">Artikel & Wawasan Terbaru</h3>
               <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
                 Pelajari strategi pengembangan digital, tips desain visual, serta tren coding untuk mempercepat perkembangan platform Anda.
@@ -1542,13 +1544,15 @@ export default function LandingPage({ packages, testimonials, blogs }: LandingPa
               <span className="p-2 bg-gradient-to-tr from-indigo-500 to-violet-500 rounded-xl">
                 <Activity className="w-5 h-5 text-white" />
               </span>
-              Web<span className="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">Craft</span>
+              <span>
+                cleav<span className="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">Craft</span>
+              </span>
             </Link>
             <p className="text-xs text-slate-500 leading-relaxed max-w-xs">
-              WebCraft adalah agensi digital modern yang berdedikasi menciptakan website premium dan aplikasi kustom dengan kecepatan performa optimal untuk akselerasi bisnis Indonesia.
+              cleavCraft adalah agensi digital modern yang berdedikasi menciptakan website premium dan aplikasi kustom dengan kecepatan performa optimal untuk akselerasi bisnis Indonesia.
             </p>
             <p className="text-xs text-slate-600">
-              © {new Date().getFullYear()} WebCraft. Hak Cipta Dilindungi.
+              © {new Date().getFullYear()} cleavCraft. Hak Cipta Dilindungi.
             </p>
           </div>
 
@@ -1651,7 +1655,7 @@ export default function LandingPage({ packages, testimonials, blogs }: LandingPa
                 <span style={{ position: "absolute", bottom: 0, right: 0, width: "11px", height: "11px", background: "#22c55e", borderRadius: "50%", border: "2px solid #ffffff" }}></span>
               </div>
               <div style={{ flex: 1 }}>
-                <div style={{ fontSize: "14px", fontWeight: 700, color: "#0f172a" }}>WebCraft AI</div>
+                 <div style={{ fontSize: "14px", fontWeight: 700, color: "#0f172a" }}>cleavCraft AI</div>
                 <div style={{ fontSize: "10px", color: "#16a34a", fontWeight: 600 }}>● Online sekarang</div>
               </div>
               <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>

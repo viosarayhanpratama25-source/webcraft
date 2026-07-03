@@ -1,14 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const SYSTEM_PROMPT = `Kamu adalah WebCraft AI, asisten virtual dari WebCraft — agensi pembuatan website profesional di Indonesia.
+const SYSTEM_PROMPT = `Kamu adalah cleavCraft AI, asisten virtual dari cleavCraft — agensi pembuatan website profesional di Indonesia.
 
 Tugas kamu:
-- Menjawab pertanyaan seputar layanan, harga, proses, dan teknologi yang digunakan WebCraft
+- Menjawab pertanyaan seputar layanan, harga, proses, dan teknologi yang digunakan cleavCraft
 - Bahasa: Indonesia yang ramah, profesional, dan ringkas
-- Jangan jawab pertanyaan di luar konteks WebCraft / web development
+- Jangan jawab pertanyaan di luar konteks cleavCraft / web development
 - Selalu arahkan ke WhatsApp untuk pemesanan
 
-Informasi WebCraft:
+Informasi cleavCraft:
 - Layanan: Website Company Profile, E-Commerce / Toko Online, Landing Page, Web App Custom
 - Harga mulai dari Rp 1.5 juta (paket Starter) hingga Rp 10 juta+ (paket Enterprise)
 - Estimasi pengerjaan: 5–20 hari kerja tergantung kompleksitas
@@ -21,7 +21,7 @@ Informasi WebCraft:
 const RULES: Array<{ keywords: string[]; reply: string }> = [
   {
     keywords: ["harga", "biaya", "berapa", "cost", "tarif", "bayar"],
-    reply: "Harga paket WebCraft mulai dari:\n\n🟢 **Starter** — Rp 1,5 jt (Company Profile sederhana, 5 hari kerja)\n🔵 **Professional** — Rp 5 jt (E-Commerce / Landing Page, 10 hari kerja)\n🟣 **Enterprise** — Rp 10 jt+ (Web App Custom, 20 hari kerja)\n\nSemua paket sudah termasuk domain + hosting 1 tahun! Mau lihat detail fiturnya?",
+    reply: "Harga paket cleavCraft mulai dari:\n\n🟢 **Starter** — Rp 1,5 jt (Company Profile sederhana, 5 hari kerja)\n🔵 **Professional** — Rp 5 jt (E-Commerce / Landing Page, 10 hari kerja)\n🟣 **Enterprise** — Rp 10 jt+ (Web App Custom, 20 hari kerja)\n\nSemua paket sudah termasuk domain + hosting 1 tahun! Mau lihat detail fiturnya?",
   },
   {
     keywords: ["lama", "waktu", "hari", "durasi", "selesai", "pengerjaan"],
@@ -29,7 +29,7 @@ const RULES: Array<{ keywords: string[]; reply: string }> = [
   },
   {
     keywords: ["revisi", "ubah", "edit", "perubahan"],
-    reply: "Kebijakan revisi WebCraft:\n\n✅ Paket Starter — **2x revisi** gratis\n✅ Paket Professional — **3x revisi** gratis\n✅ Paket Enterprise — **5x revisi** gratis\n\nRevisi tambahan di luar paket bisa didiskusikan sesuai kebutuhan.",
+    reply: "Kebijakan revisi cleavCraft:\n\n✅ Paket Starter — **2x revisi** gratis\n✅ Paket Professional — **3x revisi** gratis\n✅ Paket Enterprise — **5x revisi** gratis\n\nRevisi tambahan di luar paket bisa didiskusikan sesuai kebutuhan.",
   },
   {
     keywords: ["teknologi", "tech", "framework", "stack", "pakai", "menggunakan"],

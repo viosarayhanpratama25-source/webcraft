@@ -111,8 +111,8 @@ async function main() {
 
   const adminUser = await prisma.user.create({
     data: {
-      name: "Super Admin WebCraft",
-      email: "admin@webcraft.com",
+      name: "Super Admin cleavCraft",
+      email: "admin@cleavcraft.com",
       password: adminPassword,
       role: "ADMIN",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200",
@@ -123,7 +123,7 @@ async function main() {
   const clientUser = await prisma.user.create({
     data: {
       name: "Rian Wijaya",
-      email: "client@webcraft.com",
+      email: "client@cleavcraft.com",
       password: clientPassword,
       role: "CLIENT",
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200",
@@ -134,7 +134,7 @@ async function main() {
   const staffUser = await prisma.user.create({
     data: {
       name: "Siti Rahma",
-      email: "staff@webcraft.com",
+      email: "staff@cleavcraft.com",
       password: staffPassword,
       role: "STAFF",
       avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200",
@@ -223,7 +223,7 @@ async function main() {
     data: {
       projectId: project.id,
       senderId: clientUser.id,
-      message: "Halo tim WebCraft, logo dan brief detail sudah saya upload ya. Apakah bisa mulai diproses?",
+      message: "Halo tim cleavCraft, logo dan brief detail sudah saya upload ya. Apakah bisa mulai diproses?",
     },
   });
 
@@ -241,7 +241,7 @@ async function main() {
       userId: clientUser.id,
       projectId: project.id,
       rating: 5,
-      content: "Pelayanan sangat profesional! Tim WebCraft sangat cepat tanggap dan hasil pengerjaan website e-commerce kami sangat memuaskan, responsif di handphone, dan sistem pembayaran otomatis berjalan lancar.",
+      content: "Pelayanan sangat profesional! Tim cleavCraft sangat cepat tanggap dan hasil pengerjaan website e-commerce kami sangat memuaskan, responsif di handphone, dan sistem pembayaran otomatis berjalan lancar.",
       isPublished: true,
     },
   });
@@ -263,7 +263,7 @@ async function main() {
     data: {
       title: "Mengenal Next.js App Router untuk Pembuatan Website Modern dan Cepat",
       slug: "mengenal-nextjs-app-router-untuk-website-modern",
-      content: "Next.js telah menjadi standar industri dalam pengembangan frontend berbasis React. Dengan dirilisnya App Router, Next.js membawa inovasi besar seperti React Server Components (RSC) yang mereduksi ukuran bundle JavaScript di sisi klien, optimasi loading gambar, static routing yang fleksibel, server actions untuk interaksi database langsung tanpa API endpoints tambahan, dan performa pemuatan yang luar biasa. Pelajari bagaimana WebCraft memanfaatkan teknologi ini untuk membangun website terbaik untuk Anda.",
+      content: "Next.js telah menjadi standar industri dalam pengembangan frontend berbasis React. Dengan dirilisnya App Router, Next.js membawa inovasi besar seperti React Server Components (RSC) yang mereduksi ukuran bundle JavaScript di sisi klien, optimasi loading gambar, static routing yang fleksibel, server actions untuk interaksi database langsung tanpa API endpoints tambahan, dan performa pemuatan yang luar biasa. Pelajari bagaimana cleavCraft memanfaatkan teknologi ini untuk membangun website terbaik untuk Anda.",
       coverImage: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800",
       authorId: adminUser.id,
       status: "PUBLISHED",
