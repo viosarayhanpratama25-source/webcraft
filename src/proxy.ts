@@ -1,8 +1,8 @@
 import { withAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
 
-export default withAuth(
-  function middleware(req) {
+const authProxy = withAuth(
+  function proxy(req) {
     const token = req.nextauth.token;
     const path = req.nextUrl.pathname;
 
@@ -11,7 +11,7 @@ export default withAuth(
       return NextResponse.redirect(new URL("/dashboard", req.url));
     }
 
-    // Dashboard pages require standard login, let's redirect if no role is defined (just in case)
+    // Dashboard pages require standard login
     return NextResponse.next();
   },
   {
@@ -20,6 +20,9 @@ export default withAuth(
     },
   }
 );
+
+export default authProxy;
+export const proxy = authProxy;
 
 export const config = {
   matcher: ["/dashboard/:path*", "/admin/:path*", "/order/details", "/order/review", "/order/payment", "/order/success"],
