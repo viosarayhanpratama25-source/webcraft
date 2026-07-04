@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "npx prisma generate && next build",
-    "build:cf": "npx prisma generate && npx @opennextjs/cloudflare build",
+    "build:cf": "npx prisma generate && npx @opennextjs/cloudflare build && npx esbuild .open-next/worker.js --bundle --minify --platform=neutral --main-fields=workerd,browser,module,main --conditions=workerd,worker,browser --format=esm --external:node:* --external:cloudflare:* --external:async_hooks --external:fs --external:path --external:os --external:url --external:vm --external:crypto --external:buffer --external:util --external:events --external:assert --external:stream --external:http --external:https --external:zlib --external:string_decoder --external:querystring --external:timers --external:net --external:tls --external:dns --external:module --outfile=.open-next/assets/_worker.js",
     "start": "next start",
     "lint": "eslint"
   },
