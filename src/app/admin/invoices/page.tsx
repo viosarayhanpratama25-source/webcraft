@@ -2,7 +2,6 @@ import React from "react";
 import { db } from "@/lib/prisma";
 import AdminInvoicesList from "@/components/AdminInvoicesList";
 
-export const dynamic = "force-dynamic";
 
 export default async function AdminInvoicesPage() {
   const invoices = await db.invoice.findMany({

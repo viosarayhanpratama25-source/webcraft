@@ -1,47 +1,33 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { db } from "@/lib/prisma";
+import { getCachedInvoices } from "@/lib/cached-data";
 import ClientInvoicesList from "@/components/ClientInvoicesList";
 
-export default async function InvoicesPage() {
+function InvoicesSkeleton() {
+  return (
+    <div className="space-y-6 animate-pulse">
+      <div className="h-8 w-48 bg-slate-900/30 rounded-xl"></div>
+      <div className="h-4 w-96 bg-slate-900/20 rounded-lg mt-2"></div>
+      <div className="h-64 w-full bg-slate-900/20 rounded-3xl mt-6"></div>
+    </div>
+  );
+}
+
+export default function InvoicesPage() {
+  return (
+    <Suspense fallback={<InvoicesSkeleton />}>
+      <InvoicesContent />
+    </Suspense>
+  );
+}
+
+async function InvoicesContent() {
   const session = await getServerSession(authOptions);
   const user = session!.user as any;
 
-  // Fetch all invoices for projects that belong to the logged-in client
-  const invoices = await db.invoice.findMany({
-    where: {
-      order: {
-        project: {
-          userId: user.id
-        }
-      }
-    },
-    orderBy: {
-      createdAt: "desc"
-    },
-    include: {
-      order: {
-        include: {
-          project: {
-            select: { title: true }
-          }
-        }
-      }
-    }
-  });
-
-  const invoicesData = invoices.map(inv => ({
-    id: inv.id,
-    invoiceNumber: inv.invoiceNumber,
-    amount: inv.amount,
-    dueDate: inv.dueDate.toISOString(),
-    status: inv.status,
-    pdfUrl: inv.pdfUrl || "",
-    createdAt: inv.createdAt.toISOString(),
-    projectTitle: inv.order.project.title,
-    paymentMethod: inv.order.paymentMethod || "Bank Transfer",
-  }));
+  // Fetch all invoices using the high-performance server cache helper
+  const invoicesData = await getCachedInvoices(user.id);
 
   return (
     <div className="space-y-6">

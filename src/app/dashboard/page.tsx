@@ -1,112 +1,63 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { db } from "@/lib/prisma";
 import Link from "next/link";
 import { 
   FolderKanban, DollarSign, FileText, ArrowUpRight, 
   MessageSquare, Calendar, ChevronRight, Activity, ShoppingCart
 } from "lucide-react";
+import { getDashboardData } from "@/lib/cached-data";
 
-export default async function DashboardPage() {
+// Fallback skeleton loader for high performance UI response
+function DashboardSkeleton() {
+  return (
+    <div className="space-y-8 animate-pulse">
+      {/* Skeleton Welcome */}
+      <div className="bg-slate-900/50 border border-slate-800 rounded-3xl h-44 w-full"></div>
+      
+      {/* Skeleton Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div className="bg-slate-900/30 border border-slate-900 rounded-3xl h-24"></div>
+        <div className="bg-slate-900/30 border border-slate-900 rounded-3xl h-24"></div>
+        <div className="bg-slate-900/30 border border-slate-900 rounded-3xl h-24"></div>
+      </div>
+
+      {/* Skeleton Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className="lg:col-span-8 space-y-8">
+          <div className="bg-slate-900/20 border border-slate-900 rounded-3xl h-64"></div>
+          <div className="bg-slate-900/20 border border-slate-900 rounded-3xl h-64"></div>
+        </div>
+        <div className="lg:col-span-4">
+          <div className="bg-slate-900/20 border border-slate-900 rounded-3xl h-96"></div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function DashboardPage() {
+  return (
+    <Suspense fallback={<DashboardSkeleton />}>
+      <DashboardContent />
+    </Suspense>
+  );
+}
+
+async function DashboardContent() {
   const session = await getServerSession(authOptions);
-  const user = session!.user as any;
-
-  // 1. Fetch Stats
-  const activeProjectsCount = await db.project.count({
-    where: {
-      userId: user.id,
-      status: {
-        in: ["PENDING", "IN_PROGRESS", "REVIEW", "REVISION"]
-      }
-    }
-  });
-
-  const paidOrders = await db.projectOrder.findMany({
-    where: {
-      project: { userId: user.id },
-      paymentStatus: "PAID"
-    },
-    select: { totalPrice: true }
-  });
-  const totalSpent = paidOrders.reduce((sum, order) => sum + order.totalPrice, 0);
-
-  const pendingInvoicesCount = await db.invoice.count({
-    where: {
-      order: { project: { userId: user.id } },
-      status: "UNPAID"
-    }
-  });
-
-  // 2. Fetch Projects
-  const recentProjects = await db.project.findMany({
-    where: { userId: user.id },
-    orderBy: { createdAt: "desc" },
-    take: 3,
-    include: {
-      orders: {
-        include: {
-          package: {
-            select: { name: true }
-          }
-        }
-      }
-    }
-  });
-
-  // 3. Fetch Recent Messages
-  const recentMessages = await db.projectMessage.findMany({
-    where: {
-      project: { userId: user.id }
-    },
-    orderBy: { createdAt: "desc" },
-    take: 3,
-    include: {
-      sender: {
-        select: { name: true, role: true }
-      },
-      project: {
-        select: { title: true }
-      }
-    }
-  });
-
-  // 4. Construct a dynamic activity timeline
-  const activities = [];
-
-  // Add Project creations to activity
-  const userProjects = await db.project.findMany({
-    where: { userId: user.id },
-    orderBy: { createdAt: "desc" },
-    take: 3
-  });
-  for (const p of userProjects) {
-    activities.push({
-      type: "PROJECT_CREATE",
-      title: `Proyek '${p.title}' dibuat`,
-      desc: "Menunggu pembayaran awal atau kelengkapan berkas brief proyek.",
-      time: p.createdAt,
-    });
+  if (!session || !session.user) {
+    return null;
   }
-
-  // Add Invoices to activity
-  const userInvoices = await db.invoice.findMany({
-    where: { order: { project: { userId: user.id } } },
-    orderBy: { createdAt: "desc" },
-    take: 3
-  });
-  for (const inv of userInvoices) {
-    activities.push({
-      type: "INVOICE",
-      title: `Invoice #${inv.invoiceNumber} diterbitkan`,
-      desc: `Tagihan sebesar Rp ${(inv.amount / 1000000).toFixed(1)}jt dengan status: ${inv.status}.`,
-      time: inv.createdAt,
-    });
-  }
-
-  // Sort activities by time desc
-  activities.sort((a, b) => b.time.getTime() - a.time.getTime());
-  const finalActivities = activities.slice(0, 5);
+  const user = session.user as any;
+  const {
+    activeProjectsCount,
+    totalSpent,
+    pendingInvoicesCount,
+    recentProjects,
+    recentMessages,
+    finalActivities
+  } = await getDashboardData(user.id);
 
   return (
     <div className="space-y-8">

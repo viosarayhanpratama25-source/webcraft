@@ -1,19 +1,9 @@
 import React, { Suspense } from "react";
-export const dynamic = "force-dynamic";
-import { db } from "@/lib/prisma";
+import { getCachedPackages } from "@/lib/cached-data";
 import ClientOrderPackage from "@/components/ClientOrderPackage";
 
 export default async function OrderPage() {
-  const packages = await db.projectPackage.findMany();
-
-  const packagesData = packages.map(pkg => ({
-    id: pkg.id,
-    name: pkg.name,
-    description: pkg.description,
-    price: pkg.price,
-    features: JSON.parse(pkg.features),
-    deliveryTime: pkg.deliveryTime
-  }));
+  const packagesData = await getCachedPackages();
 
   return (
     <Suspense fallback={

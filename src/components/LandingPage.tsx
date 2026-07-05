@@ -205,11 +205,18 @@ export default function LandingPage({ packages, testimonials, blogs }: LandingPa
   const [chatMessages, setChatMessages] = useState<Array<{role:"user"|"bot", text:string, time:string}>>([{
     role: "bot",
     text: "Halo! 👋 Saya **cleavCraft AI**, asisten virtual Anda. Saya siap membantu menjawab pertanyaan seputar layanan, harga, dan proses pembuatan website. Ada yang bisa saya bantu?",
-    time: new Date().toLocaleTimeString("id-ID", {hour:"2-digit",minute:"2-digit"})
+    time: ""
   }]);
   const [chatInput, setChatInput] = useState("");
   const [chatLoading, setChatLoading] = useState(false);
   const chatEndRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    setChatMessages(prev => prev.map((msg, i) => i === 0 && msg.time === "" ? {
+      ...msg,
+      time: new Date().toLocaleTimeString("id-ID", {hour:"2-digit",minute:"2-digit"})
+    } : msg));
+  }, []);
 
   React.useEffect(() => { chatEndRef.current?.scrollIntoView({ behavior: "smooth" }); }, [chatMessages, chatLoading]);
 
@@ -1552,7 +1559,7 @@ export default function LandingPage({ packages, testimonials, blogs }: LandingPa
               cleavCraft adalah agensi digital modern yang berdedikasi menciptakan website premium dan aplikasi kustom dengan kecepatan performa optimal untuk akselerasi bisnis Indonesia.
             </p>
             <p className="text-xs text-slate-600">
-              © {new Date().getFullYear()} cleavCraft. Hak Cipta Dilindungi.
+              © 2026 cleavCraft. Hak Cipta Dilindungi.
             </p>
           </div>
 

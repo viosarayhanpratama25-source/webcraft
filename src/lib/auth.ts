@@ -46,6 +46,33 @@ export const authOptions: AuthOptions = {
     })
   ],
   callbacks: {
+    async signIn({ user, account }) {
+      if (account?.provider === "google") {
+        if (!user.email) return false;
+
+        let dbUser = await db.user.findUnique({
+          where: { email: user.email }
+        });
+
+        if (!dbUser) {
+          dbUser = await db.user.create({
+            data: {
+              name: user.name || "Google User",
+              email: user.email,
+              password: "", // Empty password for OAuth users
+              role: "CLIENT",
+              avatar: user.image || null,
+            }
+          });
+        }
+
+        user.id = dbUser.id;
+        (user as any).role = dbUser.role;
+        (user as any).avatar = dbUser.avatar;
+        (user as any).phone = dbUser.phone;
+      }
+      return true;
+    },
     async jwt({ token, user, trigger, session }) {
       if (user) {
         const u = user as any;

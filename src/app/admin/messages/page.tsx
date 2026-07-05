@@ -2,7 +2,6 @@ import React from "react";
 import { db } from "@/lib/prisma";
 import AdminMessagesList from "@/components/AdminMessagesList";
 
-export const dynamic = "force-dynamic";
 
 export default async function AdminMessagesPage() {
   const submissions = await db.contactSubmission.findMany({

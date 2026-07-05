@@ -1,39 +1,33 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { db } from "@/lib/prisma";
+import { getCachedProjects } from "@/lib/cached-data";
 import ClientProjectsList from "@/components/ClientProjectsList";
 
-export default async function ProjectsPage() {
+function ProjectsSkeleton() {
+  return (
+    <div className="space-y-6 animate-pulse">
+      <div className="h-8 w-48 bg-slate-900/30 rounded-xl"></div>
+      <div className="h-4 w-96 bg-slate-900/20 rounded-lg mt-2"></div>
+      <div className="h-64 w-full bg-slate-900/20 rounded-3xl mt-6"></div>
+    </div>
+  );
+}
+
+export default function ProjectsPage() {
+  return (
+    <Suspense fallback={<ProjectsSkeleton />}>
+      <ProjectsContent />
+    </Suspense>
+  );
+}
+
+async function ProjectsContent() {
   const session = await getServerSession(authOptions);
   const user = session!.user as any;
 
-  // Fetch all projects for the logged-in client
-  const projects = await db.project.findMany({
-    where: { userId: user.id },
-    orderBy: { createdAt: "desc" },
-    include: {
-      orders: {
-        include: {
-          package: true
-        }
-      }
-    }
-  });
-
-  // Map database projects to UI-ready structure
-  const projectsData = projects.map(project => ({
-    id: project.id,
-    title: project.title,
-    description: project.description,
-    type: project.type,
-    status: project.status,
-    budget: project.budget,
-    deadline: project.deadline.toISOString(),
-    createdAt: project.createdAt.toISOString(),
-    packageName: project.orders[0]?.package.name || "Custom",
-    price: project.orders[0]?.totalPrice || project.budget,
-  }));
+  // Fetch all projects using the high-performance server cache helper
+  const projectsData = await getCachedProjects(user.id);
 
   return (
     <div className="space-y-6">

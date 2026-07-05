@@ -1,48 +1,39 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { db } from "@/lib/prisma";
+import { getCachedProjectDetail } from "@/lib/cached-data";
 import { notFound, redirect } from "next/navigation";
 import ProjectDetailClient from "@/components/ProjectDetailClient";
 
-export default async function ProjectDetailPage({
-  params,
-}: {
+function ProjectDetailSkeleton() {
+  return (
+    <div className="space-y-6 animate-pulse">
+      <div className="h-8 w-64 bg-slate-900/30 rounded-xl"></div>
+      <div className="h-4 w-96 bg-slate-900/20 rounded-lg mt-2"></div>
+      <div className="h-96 w-full bg-slate-900/20 rounded-3xl mt-8"></div>
+    </div>
+  );
+}
+
+interface PageProps {
   params: Promise<{ id: string }>;
-}) {
+}
+
+export default function ProjectDetailPage({ params }: PageProps) {
+  return (
+    <Suspense fallback={<ProjectDetailSkeleton />}>
+      <ProjectDetailContent params={params} />
+    </Suspense>
+  );
+}
+
+async function ProjectDetailContent({ params }: PageProps) {
   const session = await getServerSession(authOptions);
   const user = session!.user as any;
   const { id } = await params;
 
-  // Query project details
-  const project = await db.project.findUnique({
-    where: { id },
-    include: {
-      user: {
-        select: { name: true, email: true, phone: true }
-      },
-      milestones: {
-        orderBy: { dueDate: "asc" }
-      },
-      files: {
-        orderBy: { createdAt: "desc" }
-      },
-      messages: {
-        orderBy: { createdAt: "asc" },
-        include: {
-          sender: {
-            select: { name: true, role: true, avatar: true }
-          }
-        }
-      },
-      orders: {
-        include: {
-          package: true,
-          invoices: true,
-        }
-      }
-    }
-  });
+  // Query project details using the high-performance server cache
+  const project = await getCachedProjectDetail(id);
 
   if (!project) {
     notFound();

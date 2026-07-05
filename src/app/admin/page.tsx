@@ -6,7 +6,6 @@ import {
   ArrowRight, ShieldCheck, Clock 
 } from "lucide-react";
 
-export const dynamic = "force-dynamic";
 
 export default async function AdminOverviewPage() {
   // Query counts and stats from DB

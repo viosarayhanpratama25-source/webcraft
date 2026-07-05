@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/prisma";
+import { revalidateTag } from "next/cache";
 
 export async function POST(req: Request) {
   try {
@@ -90,6 +91,11 @@ export async function POST(req: Request) {
         status: "UNPAID",
       }
     });
+
+    revalidateTag(`dashboard-user-${user.id}`, "max");
+    revalidateTag(`invoices-user-${user.id}`, "max");
+    revalidateTag(`orders-user-${user.id}`, "max");
+    revalidateTag(`projects-user-${user.id}`, "max");
 
     return NextResponse.json({
       message: "Order created successfully",

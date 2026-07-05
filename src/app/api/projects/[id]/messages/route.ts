@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/prisma";
+import { revalidateTag } from "next/cache";
 
 export async function POST(
   req: Request,
@@ -43,6 +44,16 @@ export async function POST(
         }
       }
     });
+
+    // Find the project owner's ID to revalidate their dashboard
+    const project = await db.project.findUnique({
+      where: { id: projectId },
+      select: { userId: true }
+    });
+    if (project) {
+      revalidateTag(`dashboard-user-${project.userId}`, "max");
+    }
+    revalidateTag(`project-detail-${projectId}`, "max");
 
     return NextResponse.json(newMessage, { status: 201 });
   } catch (error: any) {

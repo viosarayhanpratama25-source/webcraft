@@ -2,7 +2,6 @@ import React from "react";
 import { db } from "@/lib/prisma";
 import AdminProjectsList from "@/components/AdminProjectsList";
 
-export const dynamic = "force-dynamic";
 
 export default async function AdminProjectsPage() {
   // Query all projects with user details and orders

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/prisma";
+import { revalidateTag } from "next/cache";
 
 export async function POST(
   req: Request,
@@ -31,6 +32,10 @@ export async function POST(
       where: { id },
       data: { status }
     });
+
+    revalidateTag(`dashboard-user-${project.userId}`, "max");
+    revalidateTag(`projects-user-${project.userId}`, "max");
+    revalidateTag(`project-detail-${id}`, "max");
 
     return NextResponse.json({ message: "Status updated successfully", project });
   } catch (error) {

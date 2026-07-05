@@ -1,33 +1,34 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { db } from "@/lib/prisma";
-import { Calendar, ShoppingBag, Download, ExternalLink } from "lucide-react";
+import { getCachedOrders } from "@/lib/cached-data";
+import { Calendar, ShoppingBag, ExternalLink } from "lucide-react";
 import Link from "next/link";
 
-export default async function OrdersPage() {
+function OrdersSkeleton() {
+  return (
+    <div className="space-y-6 animate-pulse">
+      <div className="h-8 w-48 bg-slate-900/30 rounded-xl"></div>
+      <div className="h-4 w-96 bg-slate-900/20 rounded-lg mt-2"></div>
+      <div className="h-64 w-full bg-slate-900/20 rounded-3xl mt-6"></div>
+    </div>
+  );
+}
+
+export default function OrdersPage() {
+  return (
+    <Suspense fallback={<OrdersSkeleton />}>
+      <OrdersContent />
+    </Suspense>
+  );
+}
+
+async function OrdersContent() {
   const session = await getServerSession(authOptions);
   const user = session!.user as any;
 
-  // Fetch all orders for projects that belong to the logged-in client
-  const orders = await db.projectOrder.findMany({
-    where: {
-      project: {
-        userId: user.id,
-      },
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-    include: {
-      project: {
-        select: { title: true }
-      },
-      package: {
-        select: { name: true }
-      }
-    }
-  });
+  // Fetch all orders using the high-performance server cache helper
+  const orders = await getCachedOrders(user.id);
 
   return (
     <div className="space-y-6">

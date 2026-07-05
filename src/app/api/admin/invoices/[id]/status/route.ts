@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/prisma";
+import { revalidateTag } from "next/cache";
 
 export async function POST(
   req: Request,
@@ -35,7 +36,16 @@ export async function POST(
     // Also update order status if PAID
     const invData = await db.invoice.findUnique({
       where: { id },
-      select: { orderId: true }
+      select: { 
+        orderId: true,
+        order: {
+          select: {
+            project: {
+              select: { userId: true }
+            }
+          }
+        }
+      }
     });
 
     if (invData?.orderId) {
@@ -43,6 +53,13 @@ export async function POST(
         where: { id: invData.orderId },
         data: { paymentStatus: status }
       });
+    }
+
+    if (invData?.order?.project?.userId) {
+      const clientUserId = invData.order.project.userId;
+      revalidateTag(`dashboard-user-${clientUserId}`, "max");
+      revalidateTag(`invoices-user-${clientUserId}`, "max");
+      revalidateTag(`orders-user-${clientUserId}`, "max");
     }
 
     return NextResponse.json({ message: "Invoice status updated successfully", invoice });
